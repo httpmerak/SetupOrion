@@ -24,27 +24,27 @@ sudo apt-get install -y dialog
 sudo apt update
 sudo apt upgrade -y
 
-# Verifica se o arquivo SetupOrion já existe
-if [ -e "SetupOrion" ]; then
-    echo "O arquivo SetupOrion já existe. Removendo..."
-    rm SetupOrion
+# Verifica se o arquivo CyborgSolutions já existe
+if [ -e "CyborgSolutions" ]; then
+    echo "O arquivo CyborgSolutions já existe. Removendo..."
+    rm CyborgSolutions
 fi
 
 # Baixa o script
-curl -sSL https://raw.githubusercontent.com/httpmerak/SetupOrion/main/SetupOrion -o SetupOrion
+curl -sSL https://raw.githubusercontent.com/httpmerak/CyborgSolutions/main/CyborgSolutions -o CyborgSolutions
 
 
 # Verifica se o download foi bem-sucedido
 if [ $? -eq 0 ]; then
     # Executa o script baixado
-    chmod +x SetupOrion
-    ./SetupOrion
+    chmod +x CyborgSolutions
+    ./CyborgSolutions
 else
-    echo "Falha ao baixar o script SetupOrion"
+    echo "Falha ao baixar o script CyborgSolutions"
 fi
 
 sudo apt update
 sudo apt upgrade -y
 
 clear
-rm SetupOrion
+rm CyborgSolutions

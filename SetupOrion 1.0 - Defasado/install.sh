@@ -103,23 +103,23 @@ read -p "Escolha uma opção: " choice
 case $choice in
     1)
         clear
-        cd && cd SetupOrion && chmod +x chatwoot.sh && ./chatwoot.sh
+        cd && cd CyborgSolutions && chmod +x chatwoot.sh && ./chatwoot.sh
         ;;
     2)
         clear
-        cd && cd SetupOrion && chmod +x evolutionapi.sh && ./evolutionapi.sh
+        cd && cd CyborgSolutions && chmod +x evolutionapi.sh && ./evolutionapi.sh
         ;;
     3)
         clear
-        cd && cd SetupOrion && chmod +x typebot.sh && ./typebot.sh
+        cd && cd CyborgSolutions && chmod +x typebot.sh && ./typebot.sh
         ;;
     4)
         clear
-        cd && cd SetupOrion && chmod +x n8n.sh && ./n8n.sh
+        cd && cd CyborgSolutions && chmod +x n8n.sh && ./n8n.sh
         ;;
     5)
         clear
-        cd && cd SetupOrion && chmod +x appsmith.sh && ./appsmith.sh
+        cd && cd CyborgSolutions && chmod +x appsmith.sh && ./appsmith.sh
         ;;
     6)
         clear
@@ -128,7 +128,7 @@ case $choice in
         echo "Opção desativada temporariamente.."
         echo "Verifique nosso github para buscar atualizações."
         echo ""
-        echo "https://github.com/httpmerak/SetupOrion"
+        echo "https://github.com/httpmerak/CyborgSolutions"
         echo ""
         echo ""
         read -p "Pressione Enter para continuar..."
@@ -140,7 +140,7 @@ case $choice in
         echo "Opção desativada temporariamente.."
         echo "Verifique nosso github para buscar atualizações."
         echo ""
-        echo "https://github.com/httpmerak/SetupOrion"
+        echo "https://github.com/httpmerak/CyborgSolutions"
         echo ""
         echo ""
         read -p "Pressione Enter para continuar..."
@@ -152,7 +152,7 @@ case $choice in
         echo "Opção desativada temporariamente.."
         echo "Verifique nosso github para buscar atualizações."
         echo ""
-        echo "https://github.com/httpmerak/SetupOrion"
+        echo "https://github.com/httpmerak/CyborgSolutions"
         echo ""
         echo ""
         read -p "Pressione Enter para continuar..."

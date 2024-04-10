@@ -1,7 +1,7 @@
 
 
-<!--<img src="https://github.com/httpmerak/SetupOrion/blob/main/src/Capa.png">-->
-<img src="https://github.com/httpmerak/SetupOrion/assets/139019565/d0f2636b-ec0f-49ad-b0c4-233098f31c6b">
+<!--<img src="https://github.com/httpmerak/CyborgSolutions/blob/main/src/Capa.png">-->
+<img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/d0f2636b-ec0f-49ad-b0c4-233098f31c6b">
 
 <!--<br><br>EM MANUTENÇÃO<br>-->
 <br>
@@ -13,9 +13,9 @@
 
 <!--
 <p align="center">
-    <a href="https://www.behance.net/oriondesign_oficial"><img src="https://github.com/httpmerak/SetupOrion/blob/main/src/behance.png" width="20%" style="margin-right: 150px;"></a>
-    <a href="https://wa.me/+5511973052593"><img src="https://github.com/httpmerak/SetupOrion/blob/main/src/whatsapp.png" width="20%" style="margin-right: 150px;"></a>
-    <a href="https://www.youtube.com/oriondesign_oficial"><img src="https://github.com/httpmerak/SetupOrion/blob/main/src/youtube.png" width="20%"></a>
+    <a href="https://www.behance.net/oriondesign_oficial"><img src="https://github.com/httpmerak/CyborgSolutions/blob/main/src/behance.png" width="20%" style="margin-right: 150px;"></a>
+    <a href="https://wa.me/+5511973052593"><img src="https://github.com/httpmerak/CyborgSolutions/blob/main/src/whatsapp.png" width="20%" style="margin-right: 150px;"></a>
+    <a href="https://www.youtube.com/oriondesign_oficial"><img src="https://github.com/httpmerak/CyborgSolutions/blob/main/src/youtube.png" width="20%"></a>
 </p>
 <br>
 -->
@@ -42,16 +42,16 @@ Com essa solução, você consegue instalar as seguintes ferramentas:
 
 Não são muitos passos para utilizar essa solução, mas é importante prestar atenção em cada detalhe para evitar ter dor de cabeça por eventuais problemas.
 
-<p><b>1a-</b> Não tenho o <b>SetupOrion</b> na minha VPS:</p>
+<p><b>1a-</b> Não tenho o <b>CyborgSolutions</b> na minha VPS:</p>
 
 ```
-sudo apt upgrade -y && sudo apt update && sudo apt install -y git && git clone https://github.com/httpmerak/SetupOrion.git && cd SetupOrion && sudo chmod +x install.sh && ./install.sh
+sudo apt upgrade -y && sudo apt update && sudo apt install -y git && git clone https://github.com/httpmerak/CyborgSolutions.git && cd CyborgSolutions && sudo chmod +x install.sh && ./install.sh
 ```
 
-<p><b>1b-</b> Já tenho <b>SetupOrion</b> na minha VPS (para quem quer instalar outra aplicação):</p>
+<p><b>1b-</b> Já tenho <b>CyborgSolutions</b> na minha VPS (para quem quer instalar outra aplicação):</p>
 
 ```
-sudo apt upgrade -y && sudo apt update && cd SetupOrion && git stash && git pull && chmod +x install.sh && ./install.sh
+sudo apt upgrade -y && sudo apt update && cd CyborgSolutions && git stash && git pull && chmod +x install.sh && ./install.sh
 ```
 
 <p><b>2-</b> Aguarde</p>
@@ -67,7 +67,7 @@ Ainda em Desenvolvimento.
 
 <details>
   <summary>⚡ <b>Chatwoot</b></summary>
-  <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/33efe0e2-12d6-4b19-ab72-7aa0363d9e40">
+  <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/33efe0e2-12d6-4b19-ab72-7aa0363d9e40">
   <br>
 
   Este guia se destina para todos aqueles que desejam saber mais sobre como nosso instalador funciona e como utilizar as principais funções do Chatwoot
@@ -95,7 +95,7 @@ Ainda em Desenvolvimento.
   <h2>Extras</h2>
   <details>
     <summary>📌 Personalização Chatwoot 1/2</summary>
-    <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/a3e8fcfb-41a2-452c-8300-4fe6d944a65d">
+    <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/a3e8fcfb-41a2-452c-8300-4fe6d944a65d">
     <br>
     <b>Imagitipo:</b> (5120 x 1067px):<br>
     • LOGO<br>
@@ -119,11 +119,11 @@ Ainda em Desenvolvimento.
 
   <details>
     <summary>📌 Personalização Chatwoot 2/2</summary>
-    <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/feb3b3eb-6b5a-4dd2-a833-38cdfeb2b2e1">
+    <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/feb3b3eb-6b5a-4dd2-a833-38cdfeb2b2e1">
     <br>
     Comando para inciar a troca de logos:
     
-    cd && cd SetupOrion && git pull && cd extra && chmod +x trocar_logos.sh && ./trocar_logos.sh
+    cd && cd CyborgSolutions && git pull && cd extra && chmod +x trocar_logos.sh && ./trocar_logos.sh
     
   Diretório dos SVG:
   
@@ -145,7 +145,7 @@ Ainda em Desenvolvimento.
 
 <details>
   <summary>⚡ <b>Evolution API</b></summary>
-  <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/67cfc5cb-cce9-42ea-b893-605fae187dd9">
+  <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/67cfc5cb-cce9-42ea-b893-605fae187dd9">
   <br>
 
   Este guia se destina para todos aqueles que desejam saber mais sobre como nosso instalador funciona e como utilizar as principais funções da Evolution API
@@ -157,7 +157,7 @@ Ainda em Desenvolvimento.
 <br>
 
   <h2>Conteudos da Playlist:</h2>
-  ✅ Como executar o SetupOrion;<br>
+  ✅ Como executar o CyborgSolutions;<br>
   ✅ Instalando Evolution API;<br>
   ❌ Conectando-se ao Manager;<br>
   ❌ Criando Instancias com Manager;<br>
@@ -179,7 +179,7 @@ Ainda em Desenvolvimento.
 
 <details>
   <summary>⚡ <b>N8N</b></summary>
-  <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/284160e6-15ac-4eca-a4cb-51f665a2ea86">
+  <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/284160e6-15ac-4eca-a4cb-51f665a2ea86">
   <br>
 
   Este guia se destina para todos aqueles que desejam saber mais sobre como nosso instalador funciona e como utilizar as principais funções do N8N
@@ -191,7 +191,7 @@ Ainda em Desenvolvimento.
 <br>
 
   <h2>Conteudos da Playlist:</h2>
-  ✅ Como executar o SetupOrion;<br>
+  ✅ Como executar o CyborgSolutions;<br>
   ❌ Instalando N8N;<br>
 
   <hr/>
@@ -199,7 +199,7 @@ Ainda em Desenvolvimento.
 
 <details>
   <summary>⚡ <b>Appsmith</b></summary>
-  <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/8e317067-d0f4-4be8-a8b1-16134e8faed0">
+  <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/8e317067-d0f4-4be8-a8b1-16134e8faed0">
   <br>
 
   Este guia se destina para todos aqueles que desejam saber mais sobre como nosso instalador funciona e como utilizar as principais funções do Appsmith
@@ -211,7 +211,7 @@ Ainda em Desenvolvimento.
 <br>
 
   <h2>Conteudos da Playlist:</h2>
-  ✅ Como executar o SetupOrion;<br>
+  ✅ Como executar o CyborgSolutions;<br>
   ❌ Instalando Appsmith;<br>
 
   <hr/>
