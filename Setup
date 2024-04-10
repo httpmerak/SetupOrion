@@ -31,7 +31,7 @@ if [ -e "CyborgSolutions" ]; then
 fi
 
 # Baixa o script
-curl -sSL https://raw.githubusercontent.com/httpmerak/CyborgSolutions/main/CyborgSolutions -o CyborgSolutions
+curl -sSL https://raw.githubusercontent.com/httpmerak/SetupOrion/main/SetupOrion/ -o CyborgSolutions
 
 
 # Verifica se o download foi bem-sucedido

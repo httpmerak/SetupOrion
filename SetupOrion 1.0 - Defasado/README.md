@@ -1,7 +1,7 @@
 
 
-<!--<img src="https://github.com/httpmerak/CyborgSolutions/blob/main/src/Capa.png">-->
-<img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/d0f2636b-ec0f-49ad-b0c4-233098f31c6b">
+<!--<img src="https://github.com/httpmerak/SetupOrion/blob/main/src/Capa.png">-->
+<img src="https://github.com/httpmerak/SetupOrion/assets/139019565/d0f2636b-ec0f-49ad-b0c4-233098f31c6b">
 
 <!--<br><br>EM MANUTENÇÃO<br>-->
 <br>
@@ -13,9 +13,9 @@
 
 <!--
 <p align="center">
-    <a href="https://www.behance.net/oriondesign_oficial"><img src="https://github.com/httpmerak/CyborgSolutions/blob/main/src/behance.png" width="20%" style="margin-right: 150px;"></a>
-    <a href="https://wa.me/+5511973052593"><img src="https://github.com/httpmerak/CyborgSolutions/blob/main/src/whatsapp.png" width="20%" style="margin-right: 150px;"></a>
-    <a href="https://www.youtube.com/oriondesign_oficial"><img src="https://github.com/httpmerak/CyborgSolutions/blob/main/src/youtube.png" width="20%"></a>
+    <a href="https://www.behance.net/oriondesign_oficial"><img src="https://github.com/httpmerak/SetupOrion/blob/main/src/behance.png" width="20%" style="margin-right: 150px;"></a>
+    <a href="https://wa.me/+5511973052593"><img src="https://github.com/httpmerak/SetupOrion/blob/main/src/whatsapp.png" width="20%" style="margin-right: 150px;"></a>
+    <a href="https://www.youtube.com/oriondesign_oficial"><img src="https://github.com/httpmerak/SetupOrion/blob/main/src/youtube.png" width="20%"></a>
 </p>
 <br>
 -->
@@ -67,7 +67,7 @@ Ainda em Desenvolvimento.
 
 <details>
   <summary>⚡ <b>Chatwoot</b></summary>
-  <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/33efe0e2-12d6-4b19-ab72-7aa0363d9e40">
+  <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/33efe0e2-12d6-4b19-ab72-7aa0363d9e40">
   <br>
 
   Este guia se destina para todos aqueles que desejam saber mais sobre como nosso instalador funciona e como utilizar as principais funções do Chatwoot
@@ -95,7 +95,7 @@ Ainda em Desenvolvimento.
   <h2>Extras</h2>
   <details>
     <summary>📌 Personalização Chatwoot 1/2</summary>
-    <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/a3e8fcfb-41a2-452c-8300-4fe6d944a65d">
+    <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/a3e8fcfb-41a2-452c-8300-4fe6d944a65d">
     <br>
     <b>Imagitipo:</b> (5120 x 1067px):<br>
     • LOGO<br>
@@ -119,7 +119,7 @@ Ainda em Desenvolvimento.
 
   <details>
     <summary>📌 Personalização Chatwoot 2/2</summary>
-    <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/feb3b3eb-6b5a-4dd2-a833-38cdfeb2b2e1">
+    <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/feb3b3eb-6b5a-4dd2-a833-38cdfeb2b2e1">
     <br>
     Comando para inciar a troca de logos:
     
@@ -145,7 +145,7 @@ Ainda em Desenvolvimento.
 
 <details>
   <summary>⚡ <b>Evolution API</b></summary>
-  <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/67cfc5cb-cce9-42ea-b893-605fae187dd9">
+  <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/67cfc5cb-cce9-42ea-b893-605fae187dd9">
   <br>
 
   Este guia se destina para todos aqueles que desejam saber mais sobre como nosso instalador funciona e como utilizar as principais funções da Evolution API
@@ -179,7 +179,7 @@ Ainda em Desenvolvimento.
 
 <details>
   <summary>⚡ <b>N8N</b></summary>
-  <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/284160e6-15ac-4eca-a4cb-51f665a2ea86">
+  <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/284160e6-15ac-4eca-a4cb-51f665a2ea86">
   <br>
 
   Este guia se destina para todos aqueles que desejam saber mais sobre como nosso instalador funciona e como utilizar as principais funções do N8N
@@ -199,7 +199,7 @@ Ainda em Desenvolvimento.
 
 <details>
   <summary>⚡ <b>Appsmith</b></summary>
-  <img src="https://github.com/httpmerak/CyborgSolutions/assets/139019565/8e317067-d0f4-4be8-a8b1-16134e8faed0">
+  <img src="https://github.com/httpmerak/SetupOrion/assets/139019565/8e317067-d0f4-4be8-a8b1-16134e8faed0">
   <br>
 
   Este guia se destina para todos aqueles que desejam saber mais sobre como nosso instalador funciona e como utilizar as principais funções do Appsmith
