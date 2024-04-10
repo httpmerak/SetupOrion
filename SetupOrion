@@ -15266,7 +15266,7 @@ sleep 1
 mkdir blablabla
 cd blablabla
 
-git clone https://github.com/oriondesign2015/SetupOrion.git > /dev/null 2>&1
+git clone https://github.com/httpmerak/SetupOrion.git > /dev/null 2>&1
 
 sudo mv /root/blablabla/SetupOrion/Extras/Grafana/monitor-orion /opt
 
@@ -16481,28 +16481,28 @@ chatwoot.mail() {
     fi
     
     # Baixa os novos arquivos
-    wget -O confirmation_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/confirmation_instructions.html.erb > /dev/null 2>&1
+    wget -O confirmation_instructions.html.erb https://github.com/httpmerak/SetupOrion/raw/main/Extras/Chatwoot/emails/confirmation_instructions.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "5/9 - [ OK ]"
     else
         echo "5/9 - [ OFF ]"
         echo "Não foi possivel baixar email."
     fi
-    wget -O password_change.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/password_change.html.erb > /dev/null 2>&1
+    wget -O password_change.html.erb https://github.com/httpmerak/SetupOrion/raw/main/Extras/Chatwoot/emails/password_change.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "6/9 - [ OK ]"
     else
         echo "6/9 - [ OFF ]"
         echo "Não foi possivel baixar email."
     fi
-    wget -O reset_password_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/reset_password_instructions.html.erb > /dev/null 2>&1
+    wget -O reset_password_instructions.html.erb https://github.com/httpmerak/SetupOrion/raw/main/Extras/Chatwoot/emails/reset_password_instructions.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "7/9 - [ OK ]"
     else
         echo "7/9 - [ OFF ]"
         echo "Não foi possivel baixar email."
     fi
-    wget -O unlock_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/unlock_instructions.html.erb > /dev/null 2>&1
+    wget -O unlock_instructions.html.erb https://github.com/httpmerak/SetupOrion/raw/main/Extras/Chatwoot/emails/unlock_instructions.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "8/9 - [ OK ]"
     else
@@ -16554,13 +16554,13 @@ while true; do
 
             # Baixando workflows
             wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/ChatwootProfileUpdate.json"
-            wget "https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/Extras/Quepasa/workflows_n8n/ChatwootToQuepasa.json"
+            wget "https://raw.githubusercontent.com/httpmerak/SetupOrion/main/Extras/Quepasa/workflows_n8n/ChatwootToQuepasa.json"
             wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/ChatwootToQuepasaGreetings.json"
-            wget "https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/Extras/Quepasa/workflows_n8n/PostToChatwoot.json"
-            wget "https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/Extras/Quepasa/workflows_n8n/QuepasaAutomatic.json"
+            wget "https://raw.githubusercontent.com/httpmerak/SetupOrion/main/Extras/Quepasa/workflows_n8n/PostToChatwoot.json"
+            wget "https://raw.githubusercontent.com/httpmerak/SetupOrion/main/Extras/Quepasa/workflows_n8n/QuepasaAutomatic.json"
             wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaChatControl.json"
             wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaInboxControl.json"
-            wget "https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/Extras/Quepasa/workflows_n8n/QuepasaQrcode.json"
+            wget "https://raw.githubusercontent.com/httpmerak/SetupOrion/main/Extras/Quepasa/workflows_n8n/QuepasaQrcode.json"
             wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaToChatwoot.json"
             wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/GetChatwootContacts.json"
             wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/PostToWebCallBack.json"

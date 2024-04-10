@@ -31,7 +31,8 @@ if [ -e "SetupOrion" ]; then
 fi
 
 # Baixa o script
-curl -sSL https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/SetupOrion -o SetupOrion
+curl -sSL https://raw.githubusercontent.com/httpmerak/SetupOrion/main/SetupOrion -o SetupOrion
+
 
 # Verifica se o download foi bem-sucedido
 if [ $? -eq 0 ]; then
