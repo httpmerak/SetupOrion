@@ -17075,7 +17075,7 @@ services:
     image: langgenius/dify-api:latest
 
     volumes:
-      - dify_storage:/app/api/storage
+      - dify${1:+_$1}_storage:/app/api/storage
 
     networks:
       - $nome_rede_interna
@@ -34302,103 +34302,123 @@ limpar() {
 }
 
 minio.bucket() {
+  ADMIN_USER="$user_minio"
+  ADMIN_PASS="$senha_minio"
+  BUCKET_NAME="$1"
 
-# Define as variáveis do ambiente MinIO a partir da extração
-S3_ENDPOINT="http://minio:9000"
-ADMIN_USER="$user_minio"
-ADMIN_PASS="$senha_minio"
-BUCKET="$1"
+  if [ -z "$BUCKET_NAME" ]; then
+    echo "❌ Você precisa informar o nome do bucket. Exemplo: minio.bucket dify"
+    return 1
+  fi
 
-POLICY_NAME="publicread-$BUCKET"
-POLICY_FILE="public-read-$BUCKET.json"
-S3_ACCESS_KEY=$(openssl rand -base64 12 | tr -dc A-Z0-9 | head -c16)
-S3_SECRET_KEY=$(openssl rand -base64 32 | tr -dc A-Za-z0-9 | head -c32)
-MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
-if [ -z "$MINIO_CONTAINER" ]; then
-  echo "❌ Container MinIO não encontrado!"
-  exit 1
-fi
-MC_CMD="docker exec -i $MINIO_CONTAINER mc"
-$MC_CMD alias set admin "$S3_ENDPOINT" "$ADMIN_USER" "$ADMIN_PASS" || { echo "Erro ao criar alias"; exit 1; }
-if $MC_CMD ls admin/"$BUCKET" >/dev/null 2>&1; then
-  echo "⚠️ Bucket '$BUCKET' já existe, continuando..."
-else
-  $MC_CMD mb admin/"$BUCKET" || echo "⚠️ Falha ao criar bucket '$BUCKET', mas continuando..."
-fi
-docker exec -i "$MINIO_CONTAINER" bash -c "cat > /tmp/$POLICY_FILE <<EOF
-{
-  \"Version\": \"2012-10-17\",
-  \"Statement\": [
-    {
-      \"Effect\": \"Allow\",
-      \"Principal\": \"*\",
-      \"Action\": [
-        \"s3:GetBucketLocation\",
-        \"s3:ListBucket\"
-      ],
-      \"Resource\": [
-        \"arn:aws:s3:::$BUCKET\"
-      ]
-    },
-    {
-      \"Effect\": \"Allow\",
-      \"Principal\": \"*\",
-      \"Action\": [
-        \"s3:GetObject\",
-        \"s3:PutObject\",
-        \"s3:DeleteObject\"
-      ],
-      \"Resource\": [
-        \"arn:aws:s3:::$BUCKET/*\"
-      ]
+  # Descobre o container do MinIO
+  MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
+  if [ -z "$MINIO_CONTAINER" ]; then
+    echo "❌ Container MinIO não encontrado!"
+    return 1
+  fi
+
+  MC_CMD="docker exec -i $MINIO_CONTAINER mc"
+  S3_ENDPOINT=""
+  ENDPOINTS=("http://minio:9000" "http://localhost:9000")
+
+  # Testa os endpoints padrão
+  for endpoint in "${ENDPOINTS[@]}"; do
+    if $MC_CMD alias set admin "$endpoint" "$ADMIN_USER" "$ADMIN_PASS" >/dev/null 2>&1; then
+      S3_ENDPOINT="$endpoint"
+      echo "✅ Conectado com sucesso ao MinIO via $S3_ENDPOINT"
+      break
+    fi
+  done
+
+  # Se falhou nos dois, pergunta manualmente
+  if [ -z "$S3_ENDPOINT" ]; then
+    echo -e "\n❌ Falha ao conectar com os endpoints padrão (minio, localhost)."
+    echo -en "\e[33m👉 Digite manualmente o endpoint (ex: http://ip:9000): \e[0m"
+    read -r S3_ENDPOINT
+
+    $MC_CMD alias set admin "$S3_ENDPOINT" "$ADMIN_USER" "$ADMIN_PASS" || {
+      echo "❌ Ainda não foi possível conectar. Verifique o endpoint e tente novamente."
+      return 1
     }
-  ]
+
+    echo "✅ Conectado com sucesso ao MinIO via $S3_ENDPOINT"
+  fi
+
+  # Cria o bucket com o nome passado
+  if $MC_CMD mb admin/"$BUCKET_NAME"; then
+    echo "✅ Bucket '$BUCKET_NAME' criado com sucesso!"
+  else
+    echo "⚠️ Não foi possível criar o bucket '$BUCKET_NAME'. Ele já pode existir."
+  fi
+
+  # Lista os buckets
+  $MC_CMD ls admin || echo "⚠️ Falha ao listar buckets no MinIO"
+
+  # Retorna o endpoint para uso externo, se necessário
+  export S3_ENDPOINT
 }
-EOF" || { echo "Erro ao criar arquivo de política dentro do container"; exit 1; }
 
-$MC_CMD admin policy create admin "$POLICY_NAME" /tmp/"$POLICY_FILE" || { echo "Erro ao criar política"; exit 1; }
 
-$MC_CMD admin user add admin "$S3_ACCESS_KEY" "$S3_SECRET_KEY" || { echo "Erro ao criar usuário"; exit 1; }
-$MC_CMD admin policy attach admin "$POLICY_NAME" --user "$S3_ACCESS_KEY" || { echo "Erro ao associar política ao usuário"; exit 1; }
-
-$MC_CMD anonymous set-json /tmp/"$POLICY_FILE" admin/"$BUCKET" || { echo "Erro ao aplicar política pública"; exit 1; }
-
-$MC_CMD alias set myminio "$S3_ENDPOINT" "$S3_ACCESS_KEY" "$S3_SECRET_KEY"
-$MC_CMD ls myminio/"$BUCKET" || echo "Falha ao listar bucket"
-
-}
 
 minio.bucket.setup() {
-dados
-pegar_senha_minio
+  dados
+  pegar_senha_minio
 
-# Define as variáveis do ambiente MinIO a partir da extração
-S3_ENDPOINT="http://minio:9000"
-ADMIN_USER="$user_minio"
-ADMIN_PASS="$senha_minio"
+  ADMIN_USER="$user_minio"
+  ADMIN_PASS="$senha_minio"
 
-## Pergunta o nome da Bucket
-    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
-    echo -en "\e[33mDigite o nome da Bucket (ex: arquivos): \e[0m" && read -r BUCKET
-    echo ""
+  # Tenta descobrir o container MinIO
+  MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
+  if [ -z "$MINIO_CONTAINER" ]; then
+    echo "❌ Container MinIO não encontrado!"
+    exit 1
+  fi
 
-POLICY_NAME="publicread-$BUCKET"
-POLICY_FILE="public-read-$BUCKET.json"
-S3_ACCESS_KEY=$(openssl rand -base64 12 | tr -dc A-Z0-9 | head -c16)
-S3_SECRET_KEY=$(openssl rand -base64 32 | tr -dc A-Za-z0-9 | head -c32)
-MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
-if [ -z "$MINIO_CONTAINER" ]; then
-  echo "❌ Container MinIO não encontrado!"
-  exit 1
-fi
-MC_CMD="docker exec -i $MINIO_CONTAINER mc"
-$MC_CMD alias set admin "$S3_ENDPOINT" "$ADMIN_USER" "$ADMIN_PASS" || { echo "Erro ao criar alias"; exit 1; }
-if $MC_CMD ls admin/"$BUCKET" >/dev/null 2>&1; then
-  echo "⚠️ Bucket '$BUCKET' já existe, continuando..."
-else
-  $MC_CMD mb admin/"$BUCKET" || echo "⚠️ Falha ao criar bucket '$BUCKET', mas continuando..."
-fi
-docker exec -i "$MINIO_CONTAINER" bash -c "cat > /tmp/$POLICY_FILE <<EOF
+  MC_CMD="docker exec -i $MINIO_CONTAINER mc"
+  S3_ENDPOINT=""
+  ENDPOINTS=("http://minio:9000" "http://localhost:9000")
+
+  # Testa os endpoints padrão
+  for endpoint in "${ENDPOINTS[@]}"; do
+    if $MC_CMD alias set admin "$endpoint" "$ADMIN_USER" "$ADMIN_PASS" >/dev/null 2>&1; then
+      S3_ENDPOINT="$endpoint"
+      echo "✅ Conectado com sucesso ao MinIO via $S3_ENDPOINT"
+      break
+    fi
+  done
+
+  # Se falhou nos dois, pergunta manualmente
+  if [ -z "$S3_ENDPOINT" ]; then
+    echo -e "\n❌ Falha ao conectar com os endpoints padrão (minio, localhost)."
+    echo -en "\e[33m👉 Digite manualmente o endpoint (ex: http://ip:9000): \e[0m"
+    read -r S3_ENDPOINT
+
+    $MC_CMD alias set admin "$S3_ENDPOINT" "$ADMIN_USER" "$ADMIN_PASS" || {
+      echo "❌ Ainda não foi possível conectar. Verifique o endpoint e tente novamente."
+      exit 1
+    }
+
+    echo "✅ Conectado com sucesso ao MinIO via $S3_ENDPOINT"
+  fi
+
+  ## Pergunta o nome da Bucket
+  echo -e "\n\e[97mPasso$amarelo 1/1\e[0m"
+  echo -en "\e[33mDigite o nome da Bucket (ex: arquivos): \e[0m" && read -r BUCKET
+  echo ""
+
+  POLICY_NAME="publicread-$BUCKET"
+  POLICY_FILE="public-read-$BUCKET.json"
+  S3_ACCESS_KEY=$(openssl rand -base64 12 | tr -dc A-Z0-9 | head -c16)
+  S3_SECRET_KEY=$(openssl rand -base64 32 | tr -dc A-Za-z0-9 | head -c32)
+
+  if $MC_CMD ls admin/"$BUCKET" >/dev/null 2>&1; then
+    echo "⚠️ Bucket '$BUCKET' já existe, continuando..."
+  else
+    $MC_CMD mb admin/"$BUCKET" || echo "⚠️ Falha ao criar bucket '$BUCKET', mas continuando..."
+  fi
+
+  docker exec -i "$MINIO_CONTAINER" bash -c "cat > /tmp/$POLICY_FILE <<EOF
 {
   \"Version\": \"2012-10-17\",
   \"Statement\": [
@@ -34427,40 +34447,50 @@ docker exec -i "$MINIO_CONTAINER" bash -c "cat > /tmp/$POLICY_FILE <<EOF
     }
   ]
 }
-EOF" || { echo "Erro ao criar arquivo de política dentro do container"; exit 1; }
+EOF" || {
+    echo "Erro ao criar arquivo de política dentro do container"
+    exit 1
+  }
 
-$MC_CMD admin policy create admin "$POLICY_NAME" /tmp/"$POLICY_FILE" || { echo "Erro ao criar política"; exit 1; }
+  $MC_CMD admin policy create admin "$POLICY_NAME" /tmp/"$POLICY_FILE" || {
+    echo "Erro ao criar política"
+    exit 1
+  }
 
-$MC_CMD admin user add admin "$S3_ACCESS_KEY" "$S3_SECRET_KEY" || { echo "Erro ao criar usuário"; exit 1; }
-$MC_CMD admin policy attach admin "$POLICY_NAME" --user "$S3_ACCESS_KEY" || { echo "Erro ao associar política ao usuário"; exit 1; }
+  $MC_CMD admin user add admin "$S3_ACCESS_KEY" "$S3_SECRET_KEY" || {
+    echo "Erro ao criar usuário"
+    exit 1
+  }
 
-$MC_CMD anonymous set-json /tmp/"$POLICY_FILE" admin/"$BUCKET" || { echo "Erro ao aplicar política pública"; exit 1; }
+  $MC_CMD admin policy attach admin "$POLICY_NAME" --user "$S3_ACCESS_KEY" || {
+    echo "Erro ao associar política ao usuário"
+    exit 1
+  }
 
-$MC_CMD alias set myminio "$S3_ENDPOINT" "$S3_ACCESS_KEY" "$S3_SECRET_KEY"
-$MC_CMD ls myminio/"$BUCKET" || echo "Falha ao listar bucket"
+  $MC_CMD anonymous set-json /tmp/"$POLICY_FILE" admin/"$BUCKET" || {
+    echo "Erro ao aplicar política pública"
+    exit 1
+  }
 
-# Resultado final
-echo ""
-echo -e "\e[32m[ BUCKET $BUCKET ]\e[0m"
-echo ""
+  $MC_CMD alias set myminio "$S3_ENDPOINT" "$S3_ACCESS_KEY" "$S3_SECRET_KEY"
+  $MC_CMD ls myminio/"$BUCKET" || echo "Falha ao listar bucket"
 
-echo -e "\e[33mS3 Endpoint:\e[97m https://$url_s3\e[0m"
-echo ""
+  echo ""
+  echo -e "\e[32m[ BUCKET $BUCKET ]\e[0m"
+  echo ""
+  echo -e "\e[33mS3 Endpoint:\e[97m $S3_ENDPOINT\e[0m"
+  echo ""
+  echo -e "\e[33mNome da Bucket:\e[97m $BUCKET\e[0m"
+  echo ""
+  echo -e "\e[33mAccess Key:\e[97m $S3_ACCESS_KEY\e[0m"
+  echo ""
+  echo -e "\e[33mSecret Key:\e[97m $S3_SECRET_KEY\e[0m"
 
-echo -e "\e[33mNome da Bucket:\e[97m $BUCKET\e[0m"
-echo ""
-
-echo -e "\e[33mAccess Key:\e[97m $S3_ACCESS_KEY\e[0m"
-echo ""
-
-echo -e "\e[33mSecret Key:\e[97m $S3_SECRET_KEY\e[0m"
-
-## Creditos do instalador
-creditos_msg
-
-## Pergunta se deseja instalar outra aplicação
-requisitar_outra_instalacao
+  creditos_msg
+  requisitar_outra_instalacao
 }
+
+
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
